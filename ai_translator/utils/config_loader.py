@@ -5,6 +5,7 @@ class ConfigLoader:
         self.config_path = config_path
 
     def load_config(self):
+        print("Config path:", self.config_path)
         with open(self.config_path, "r") as f:
             config = yaml.safe_load(f)
         return config

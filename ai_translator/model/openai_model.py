@@ -16,15 +16,15 @@ class OpenAIModel(Model):
         while attempts < 3:
             try:
                 if self.model == "gpt-3.5-turbo":
-                    response = openai.ChatCompletion.create(
+                    response = openai.chat.completions.create(
                         model=self.model,
                         messages=[
                             {"role": "user", "content": prompt}
                         ]
                     )
-                    translation = response.choices[0].message['content'].strip()
+                    translation = response.choices[0].message.content.strip()
                 else:
-                    response = openai.Completion.create(
+                    response = openai.chat.completions.create(
                         model=self.model,
                         prompt=prompt,
                         max_tokens=150,
@@ -33,7 +33,7 @@ class OpenAIModel(Model):
                     translation = response.choices[0].text.strip()
 
                 return translation, True
-            except openai.error.RateLimitError:
+            except openai.RateLimitError:
                 attempts += 1
                 if attempts < 3:
                     LOG.warning("Rate limit reached. Waiting for 60 seconds before retrying.")
