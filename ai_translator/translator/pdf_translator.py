@@ -10,7 +10,7 @@ class PDFTranslator:
         self.pdf_parser = PDFParser()
         self.writer = Writer()
 
-    def translate_pdf(self, pdf_file_path: str, file_format: str = 'PDF', target_language: str = '中文', output_file_path: str = None, pages: Optional[int] = None):
+    def translate_pdf(self, pdf_file_path: str, file_format: str = 'PDF', target_language: str = '日语', output_file_path: str = None, pages: Optional[int] = None):
         self.book = self.pdf_parser.parse_pdf(pdf_file_path, pages)
 
         for page_idx, page in enumerate(self.book.pages):
